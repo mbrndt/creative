@@ -13,6 +13,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Message from "../components/message";
+import { BsTrash2Fill } from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
 
 export default function Dashboard() {
   const route = useRouter();
@@ -41,10 +43,26 @@ export default function Dashboard() {
       <h1>Your posts</h1>
       <div>
         {posts.map((post) => (
-          <Message {...post} key={post.id}></Message>
+          <Message {...post} key={post.id}>
+            <div className="flex gap-4">
+              <button className="text-green-600 flex items-center justify-center gap-2 py-2 text-sm">
+                <BsTrash2Fill className="text-2xl " />
+                Delete
+              </button>
+              <button className="text-teal-600 flex items-center justify-center gap-2 py-2 text-sm">
+                <AiFillEdit className="text-2xl " />
+                Edit
+              </button>
+            </div>
+          </Message>
         ))}
       </div>
-      <button onClick={() => auth.signOut()}>Sign Out</button>
+      <button
+        className="font-medium text-white bg-teal-800 py-2 px-4 my-6"
+        onClick={() => auth.signOut()}
+      >
+        Sign Out
+      </button>
     </div>
   );
 }
